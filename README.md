@@ -28,15 +28,15 @@ We could do
 
 ``` r
 my_alert <- create_exception(
-  "I am pretty urgent", 
-  nature = "alert", 
+  create_message(default = "I am pretty urgent"), 
+  nature = "warning", 
   cause = "because the weather is getting bad. Look at the clouds",
   parameter = letters[1:3],
   id = create_id("mypackage", 1)
 )
 
 my_alert
-#> Alert: I am pretty urgent
+#> [WARNING] I am pretty urgent
 my_alert$parameter
 #> [1] "a" "b" "c"
 ```
@@ -48,4 +48,20 @@ my_alert$id
 #> [1] "mypackage-1"
 my_alert$cause
 #> [1] "because the weather is getting bad. Look at the clouds"
+```
+
+We can also create different messages depending on the language setting.
+
+``` r
+f <- function() {
+  msg <- create_message(default = "That's in english", de = "Deutsche Nachricht")
+  create_exception(msg, nature = "error")
+}
+Sys.setenv(LANG = "en")
+f()
+#> [ERROR] That's in english
+
+Sys.setenv(LANG = "de")
+f()
+#> [ERROR] Deutsche Nachricht
 ```

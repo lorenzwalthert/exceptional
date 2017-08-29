@@ -4,7 +4,14 @@
 \alias{create_exception}
 \title{Create an exception}
 \usage{
-create_exception(message, nature, ...)
+create_exception(message, nature, id = NULL, ..., allowed_natures = NULL)
+}
+\arguments{
+\item{message}{The message that should be displayed to the user. Object of
+class "exceptional-message", created with [create_message()].}
+
+\item{nature}{The nature of the exception.
+`allowed_natures`.}
 }
 \description{
 Create an objecto fo class "exceptional" that contains a message and data
